@@ -9,9 +9,8 @@ app = Flask(__name__)
 CORS(app)
 
 # ✅ Load trained model
-model = tf.keras.models.load_model(
-    r"C:\Users\tanis\Desktop\DefectAnalysisSystem\NEU-DET\defect_model.h5"
-)
+model = tf.keras.models.load_model("defect_model.h5")
+
 
 # ✅ Manually set CLASS_NAMES — update this if class_indices change
 CLASS_NAMES = ['crazing', 'inclusion', 'patches', 'pitted_surface', 'rolled-in_scale', 'scratches']
