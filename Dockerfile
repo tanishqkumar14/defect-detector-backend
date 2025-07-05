@@ -1,19 +1,22 @@
-# Dockerfile
+# Use official Python image with version 3.10
 FROM python:3.10-slim
 
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set working directory
 WORKDIR /app
-COPY . .
 
-# Install required tools
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+# Copy all files to the container
+COPY . /app
 
-# Upgrade pip and install dependencies
+# Install dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Expose the port Flask will run on
-EXPOSE 7860
+# Expose the port (Gradio expects 7860, but we’re using Flask, so we use 5000)
+EXPOSE 5000
 
-# Run the Flask app
+# Start the Flask app
 CMD ["python", "app.py"]
-Dockerfile
